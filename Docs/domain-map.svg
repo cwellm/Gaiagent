@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="520" viewBox="0 0 960 520" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14">
+<style>
+ .t{fill:#1f2933}
+ .tw{fill:#ffffff}
+ .ts{fill:#52606d;font-size:12px}
+ .hex{fill:#dfe7ec;stroke:#2f3e46;stroke-width:2}
+ .mod{fill:#ffffff;stroke:#2f3e46;stroke-width:1.5}
+ .bar{fill:#2f3e46}
+ .bar2{fill:#52606d}
+ .ln{stroke:#5c7080;stroke-width:1.5;fill:none}
+ .tag{fill:#3d5a80;font-size:11px;font-weight:600}
+</style>
+<defs>
+ <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+  <path d="M0 0 L10 5 L0 10 z" fill="#5c7080"/>
+ </marker>
+</defs>
+<rect width="960" height="520" fill="#fafafa"/>
+<text x="24" y="30" class="t" font-size="18" font-weight="600">Round 2 — not one core: a domain of small modules with explicit contracts</text>
+<text x="24" y="50" class="ts">Hexagonal "core" means "no infrastructure inside", not "one object". Each module has its own small set of ports.</text>
+
+<polygon points="330,100 630,100 730,270 630,440 330,440 230,270" class="hex"/>
+<text x="480" y="128" text-anchor="middle" class="t" font-weight="600">Domain</text>
+
+<g class="t">
+ <rect x="320" y="150" width="150" height="64" rx="8" class="mod"/>
+ <text x="395" y="174" text-anchor="middle" font-weight="600">Flow</text>
+ <text x="395" y="192" text-anchor="middle" class="ts">graph · router · checkpoints</text>
+
+ <rect x="490" y="150" width="150" height="64" rx="8" class="mod"/>
+ <text x="565" y="174" text-anchor="middle" font-weight="600">Process</text>
+ <text x="565" y="192" text-anchor="middle" class="ts">tree · lifecycle · budgets</text>
+
+ <rect x="490" y="236" width="150" height="64" rx="8" class="mod"/>
+ <text x="565" y="260" text-anchor="middle" font-weight="600">Turn</text>
+ <text x="565" y="278" text-anchor="middle" class="ts">step loop · phases · hooks</text>
+
+ <rect x="320" y="236" width="150" height="64" rx="8" class="mod"/>
+ <text x="395" y="260" text-anchor="middle" font-weight="600">Context</text>
+ <text x="395" y="278" text-anchor="middle" class="ts">log · views · projections · merges</text>
+</g>
+<path d="M470 182 H490" class="ln" marker-end="url(#arr)"/>
+<path d="M565 214 V236" class="ln" marker-end="url(#arr)"/>
+<path d="M490 268 H470" class="ln" marker-end="url(#arr)"/>
+<rect x="292" y="318" width="376" height="30" rx="6" class="bar"/>
+<text x="480" y="338" text-anchor="middle" class="tw" font-size="11">Policy · capabilities · autonomy levels · approval</text>
+<rect x="292" y="358" width="376" height="30" rx="6" class="bar2"/>
+<text x="480" y="378" text-anchor="middle" class="tw" font-size="11">Contracts · message model · events · ids</text>
+
+<text x="30" y="150" class="tag">DRIVING ADAPTERS</text>
+<g class="ts">
+ <text x="30" y="172">Ktor HTTP + SSE (remote API, auth)</text>
+ <text x="30" y="192">Compose UI (in-process)</text>
+ <text x="30" y="212">ACP (Zed, JetBrains IDEs)</text>
+ <text x="30" y="232">Host bridges (Reaper, Krita)</text>
+ <text x="30" y="252">CLI</text>
+ <text x="30" y="272">Scheduler / triggers</text>
+</g>
+<path d="M190 300 H228" class="ln" marker-end="url(#arr)"/>
+<text x="30" y="304" class="ts">call ports of Flow / Process</text>
+
+<text x="770" y="150" class="tag">DRIVEN ADAPTERS</text>
+<g class="ts">
+ <text x="770" y="172">ModelPort → Anthropic · OpenAI · Ollama</text>
+ <text x="770" y="192">ToolPort → local tools · MCP servers</text>
+ <text x="770" y="212">PersistencePort → SQLite</text>
+ <text x="770" y="232">ApprovalPort → UI prompt · auto</text>
+ <text x="770" y="252">SecretsPort → OS keychain</text>
+ <text x="770" y="272">EventSink → UI stream · log</text>
+</g>
+<path d="M732 300 H768" class="ln" marker-end="url(#arr)"/>
+<text x="770" y="304" class="ts">called by Turn / Context / Policy</text>
+
+<text x="480" y="470" text-anchor="middle" class="ts">Dependency direction: Flow → Process → Turn → Context. Policy and Contracts are leaves. Nothing points upward.</text>
+<text x="480" y="492" text-anchor="middle" class="ts">Policy is used by all four modules. Contracts are the one serialization for HTTP and in-process callers.</text>
+</svg>

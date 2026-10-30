@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="520" viewBox="0 0 960 520" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14">
+<style>
+ .t{fill:#1f2933}
+ .tw{fill:#ffffff}
+ .ts{fill:#52606d;font-size:12px}
+ .hex{fill:#dfe7ec;stroke:#2f3e46;stroke-width:2}
+ .phase{fill:#2f3e46}
+ .ad{fill:#ffffff;stroke:#5c7080;stroke-width:1.5}
+ .ln{stroke:#5c7080;stroke-width:1.5;fill:none}
+</style>
+<defs>
+ <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+  <path d="M0 0 L10 5 L0 10 z" fill="#5c7080"/>
+ </marker>
+</defs>
+<rect width="960" height="520" fill="#fafafa"/>
+<text x="24" y="30" class="t" font-size="18" font-weight="600">Architecture C — Hexagonal core (ports &amp; adapters) with a turn pipeline</text>
+
+<polygon points="330,120 630,120 730,290 630,460 330,460 230,290" class="hex"/>
+<text x="480" y="150" text-anchor="middle" class="t" font-weight="600">Domain core</text>
+<text x="480" y="170" text-anchor="middle" class="ts">pure Kotlin · no Ktor · no provider SDKs · fully unit-testable</text>
+<text x="480" y="196" text-anchor="middle" class="t" font-weight="600" font-size="13">Turn pipeline (phases)</text>
+
+<g class="tw" font-size="12">
+ <rect x="380" y="206" width="200" height="22" rx="4" class="phase"/><text x="480" y="222" text-anchor="middle">1 · Prepare context</text>
+ <rect x="380" y="234" width="200" height="22" rx="4" class="phase"/><text x="480" y="250" text-anchor="middle">2 · Compress history</text>
+ <rect x="380" y="262" width="200" height="22" rx="4" class="phase"/><text x="480" y="278" text-anchor="middle">3 · Select model (escalation)</text>
+ <rect x="380" y="290" width="200" height="22" rx="4" class="phase"/><text x="480" y="306" text-anchor="middle">4 · Call model (stream)</text>
+ <rect x="380" y="318" width="200" height="22" rx="4" class="phase"/><text x="480" y="334" text-anchor="middle">5 · Gate tool calls (autonomy)</text>
+ <rect x="380" y="346" width="200" height="22" rx="4" class="phase"/><text x="480" y="362" text-anchor="middle">6 · Execute tools</text>
+ <rect x="380" y="374" width="200" height="22" rx="4" class="phase"/><text x="480" y="390" text-anchor="middle">7 · Persist &amp; emit events</text>
+</g>
+<text x="480" y="420" text-anchor="middle" class="ts">strategies = interceptors on a phase</text>
+<text x="480" y="438" text-anchor="middle" class="ts">ports = Kotlin interfaces owned by the core</text>
+
+<text x="30" y="104" class="ts">Driving adapters → inbound ports</text>
+<g class="t">
+ <rect x="30" y="120" width="160" height="50" rx="6" class="ad"/><text x="110" y="141" text-anchor="middle" font-weight="600">Ktor HTTP + SSE</text><text x="110" y="159" text-anchor="middle" class="ts">remote API, auth lives here</text>
+ <rect x="30" y="190" width="160" height="50" rx="6" class="ad"/><text x="110" y="211" text-anchor="middle" font-weight="600">Compose UI</text><text x="110" y="229" text-anchor="middle" class="ts">in-process, no HTTP</text>
+ <rect x="30" y="260" width="160" height="50" rx="6" class="ad"/><text x="110" y="281" text-anchor="middle" font-weight="600">ACP</text><text x="110" y="299" text-anchor="middle" class="ts">Zed, JetBrains IDEs</text>
+ <rect x="30" y="330" width="160" height="50" rx="6" class="ad"/><text x="110" y="351" text-anchor="middle" font-weight="600">Host bridge</text><text x="110" y="369" text-anchor="middle" class="ts">Reaper · Krita</text>
+ <rect x="30" y="400" width="160" height="50" rx="6" class="ad"/><text x="110" y="421" text-anchor="middle" font-weight="600">CLI / scripts</text><text x="110" y="439" text-anchor="middle" class="ts">automation entry</text>
+</g>
+<path d="M190 145 H313" class="ln" marker-end="url(#arr)"/>
+<path d="M190 215 H272" class="ln" marker-end="url(#arr)"/>
+<path d="M190 285 H231" class="ln" marker-end="url(#arr)"/>
+<path d="M190 355 H266" class="ln" marker-end="url(#arr)"/>
+<path d="M190 425 H307" class="ln" marker-end="url(#arr)"/>
+
+<text x="770" y="104" class="ts">Outbound ports → driven adapters</text>
+<g class="t">
+ <rect x="770" y="120" width="160" height="50" rx="6" class="ad"/><text x="850" y="141" text-anchor="middle" font-weight="600">ModelPort</text><text x="850" y="159" text-anchor="middle" class="ts">Anthropic · OpenAI · Ollama</text>
+ <rect x="770" y="190" width="160" height="50" rx="6" class="ad"/><text x="850" y="211" text-anchor="middle" font-weight="600">ToolPort</text><text x="850" y="229" text-anchor="middle" class="ts">local tools · MCP servers</text>
+ <rect x="770" y="260" width="160" height="50" rx="6" class="ad"/><text x="850" y="281" text-anchor="middle" font-weight="600">PersistencePort</text><text x="850" y="299" text-anchor="middle" class="ts">SQLite (SQLDelight)</text>
+ <rect x="770" y="330" width="160" height="50" rx="6" class="ad"/><text x="850" y="351" text-anchor="middle" font-weight="600">ApprovalPort</text><text x="850" y="369" text-anchor="middle" class="ts">UI prompt · policy auto</text>
+ <rect x="770" y="400" width="160" height="50" rx="6" class="ad"/><text x="850" y="421" text-anchor="middle" font-weight="600">SecretsPort</text><text x="850" y="439" text-anchor="middle" class="ts">OS keychain · env</text>
+</g>
+<path d="M647 145 H770" class="ln" marker-end="url(#arr)"/>
+<path d="M688 215 H770" class="ln" marker-end="url(#arr)"/>
+<path d="M729 285 H770" class="ln" marker-end="url(#arr)"/>
+<path d="M694 355 H770" class="ln" marker-end="url(#arr)"/>
+<path d="M653 425 H770" class="ln" marker-end="url(#arr)"/>
+
+<text x="480" y="495" text-anchor="middle" class="ts">Desktop bundle = Compose UI adapter + all driven adapters in one JVM. Headless service = Ktor adapter + the same driven adapters. Same core.</text>
+</svg>

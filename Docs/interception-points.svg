@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="440" viewBox="0 0 960 440" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14">
+<style>
+ .t{fill:#1f2933}
+ .tw{fill:#ffffff}
+ .ts{fill:#52606d;font-size:12px}
+ .phase{fill:#2f3e46}
+ .slot{fill:#dfe7ec;stroke:#2f3e46;stroke-width:1.5}
+ .hook{fill:#ffffff;stroke:#5c7080;stroke-width:1.2;stroke-dasharray:4 3}
+ .ln{stroke:#8fa3ad;stroke-width:1.2;fill:none}
+ .tag{fill:#3d5a80;font-size:11px;font-weight:600}
+ .s{font-size:11px}
+</style>
+<rect width="960" height="440" fill="#fafafa"/>
+<text x="24" y="30" class="t" font-size="18" font-weight="600">Interception points of one turn — slots (exactly one) and hooks (zero or more)</text>
+
+<text x="30" y="80" class="tag">SLOTS · exactly one strategy, defaults exist</text>
+<g class="t s">
+ <rect x="122" y="96" width="86" height="56" rx="6" class="slot"/><text x="165" y="120" text-anchor="middle">Prompt</text><text x="165" y="134" text-anchor="middle">Assembly</text>
+ <rect x="214" y="96" width="86" height="56" rx="6" class="slot"/><text x="257" y="120" text-anchor="middle">Context</text><text x="257" y="134" text-anchor="middle">Strategy</text>
+ <rect x="306" y="96" width="86" height="56" rx="6" class="slot"/><text x="349" y="120" text-anchor="middle">Model</text><text x="349" y="134" text-anchor="middle">Selector</text>
+ <rect x="398" y="96" width="86" height="56" rx="6" class="slot"/><text x="441" y="120" text-anchor="middle">Thinking</text><text x="441" y="134" text-anchor="middle">Strategy</text>
+ <rect x="490" y="96" width="86" height="56" rx="6" class="slot"/><text x="533" y="120" text-anchor="middle">Autonomy</text><text x="533" y="134" text-anchor="middle">Policy</text>
+ <rect x="674" y="96" width="86" height="56" rx="6" class="slot"/><text x="717" y="120" text-anchor="middle">Subagent</text><text x="717" y="134" text-anchor="middle">Strategy</text>
+ <rect x="766" y="96" width="86" height="56" rx="6" class="slot"/><text x="809" y="120" text-anchor="middle">Merge</text><text x="809" y="134" text-anchor="middle">Strategy</text>
+ <rect x="858" y="96" width="86" height="56" rx="6" class="slot"/><text x="901" y="120" text-anchor="middle">Router</text><text x="901" y="134" text-anchor="middle">next node</text>
+</g>
+<path d="M165 152 V200 M257 152 V200 M349 152 V200 M441 152 V200 M533 152 V200 M717 152 V200 M809 152 V200 M901 152 V200" class="ln"/>
+
+<g class="tw" font-size="12">
+ <rect x="30" y="200" width="86" height="36" rx="6" class="phase"/><text x="73" y="223" text-anchor="middle">Start</text>
+ <rect x="122" y="200" width="86" height="36" rx="6" class="phase"/><text x="165" y="223" text-anchor="middle">Prepare</text>
+ <rect x="214" y="200" width="86" height="36" rx="6" class="phase"/><text x="257" y="223" text-anchor="middle">Compress</text>
+ <rect x="306" y="200" width="86" height="36" rx="6" class="phase"/><text x="349" y="223" text-anchor="middle">Select</text>
+ <rect x="398" y="200" width="86" height="36" rx="6" class="phase"/><text x="441" y="223" text-anchor="middle">Call</text>
+ <rect x="490" y="200" width="86" height="36" rx="6" class="phase"/><text x="533" y="223" text-anchor="middle">Gate</text>
+ <rect x="582" y="200" width="86" height="36" rx="6" class="phase"/><text x="625" y="223" text-anchor="middle">Execute</text>
+ <rect x="674" y="200" width="86" height="36" rx="6" class="phase"/><text x="717" y="223" text-anchor="middle">Delegate</text>
+ <rect x="766" y="200" width="86" height="36" rx="6" class="phase"/><text x="809" y="223" text-anchor="middle">Converge</text>
+ <rect x="858" y="200" width="86" height="36" rx="6" class="phase"/><text x="901" y="223" text-anchor="middle">End</text>
+</g>
+
+<path d="M73 236 V264 M165 236 V264 M257 236 V264 M349 236 V264 M441 236 V264 M533 236 V264 M625 236 V264 M717 236 V264 M809 236 V264 M901 236 V264" class="ln"/>
+
+<text x="30" y="279" class="tag">HOOKS · chain of 0..n interceptors, pass-through by default</text>
+<g class="t s">
+ <rect x="30" y="284" width="86" height="56" rx="6" class="hook"/><text x="73" y="316" text-anchor="middle">onTurnStart</text>
+ <rect x="122" y="284" width="86" height="56" rx="6" class="hook"/><text x="165" y="316" text-anchor="middle">onContextBuilt</text>
+ <rect x="214" y="284" width="86" height="56" rx="6" class="hook"/><text x="257" y="316" text-anchor="middle">afterCompress</text>
+ <rect x="306" y="284" width="86" height="56" rx="6" class="hook"/><text x="349" y="316" text-anchor="middle">onModelChosen</text>
+ <rect x="398" y="284" width="86" height="56" rx="6" class="hook"/><text x="441" y="309" text-anchor="middle">beforeModelCall</text><text x="441" y="323" text-anchor="middle">onModelChunk</text>
+ <rect x="490" y="284" width="86" height="56" rx="6" class="hook"/><text x="533" y="316" text-anchor="middle">onToolProposed</text>
+ <rect x="582" y="284" width="86" height="56" rx="6" class="hook"/><text x="625" y="316" text-anchor="middle">afterToolResult</text>
+ <rect x="674" y="284" width="86" height="56" rx="6" class="hook"/><text x="717" y="316" text-anchor="middle">onChildSpawned</text>
+ <rect x="766" y="284" width="86" height="56" rx="6" class="hook"/><text x="809" y="316" text-anchor="middle">onChildFinished</text>
+ <rect x="858" y="284" width="86" height="56" rx="6" class="hook"/><text x="901" y="316" text-anchor="middle">onTurnEnd</text>
+</g>
+
+<text x="30" y="376" class="ts">Slots must be filled; the kernel ships defaults. Hooks may be empty. Both are typed per point: a hook receives and returns that point's payload and may transform or short-circuit.</text>
+<text x="30" y="396" class="ts">Plugins contribute to either. Call ⇄ Gate ⇄ Execute repeat as the step loop. Delegate and Converge run only when the Subagent strategy decides to spawn.</text>
+<text x="30" y="416" class="ts">Router is consulted after the turn and decides the successor node(s) at level 3; a declared workflow is just a Router that reads a file.</text>
+</svg>

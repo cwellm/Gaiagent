@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14">
+<style>
+ .t{fill:#1f2933}
+ .tw{fill:#ffffff}
+ .ts{fill:#52606d;font-size:12px}
+ .kernel{fill:#2f3e46;stroke:#1b262c;stroke-width:1.5}
+ .ep{fill:#dfe7ec;stroke:#5c7080;stroke-width:1.5}
+ .pl{fill:#ffffff;stroke:#8fa3ad;stroke-width:1.2}
+ .ln{stroke:#5c7080;stroke-width:1.5;fill:none}
+ .warn{fill:#fff4e5;stroke:#c05621;stroke-width:1.2;stroke-dasharray:5 4}
+ .tw2{fill:#9a4a12;font-size:12px}
+</style>
+<rect width="960" height="540" fill="#fafafa"/>
+<text x="24" y="30" class="t" font-size="18" font-weight="600">Architecture A — Microkernel with typed extension points</text>
+
+<rect x="330" y="56" width="300" height="96" rx="8" class="kernel"/>
+<text x="480" y="82" text-anchor="middle" class="tw" font-weight="600">Kernel</text>
+<text x="480" y="104" text-anchor="middle" class="tw" font-size="12">turn loop · conversation state</text>
+<text x="480" y="122" text-anchor="middle" class="tw" font-size="12">extension registry · plugin loader</text>
+<text x="480" y="140" text-anchor="middle" class="tw" font-size="12">no Ktor, no provider SDKs inside</text>
+
+<path d="M480 152 V180 M100 180 H860 M100 180 V210 M252 180 V210 M404 180 V210 M556 180 V210 M708 180 V210 M860 180 V210" class="ln"/>
+
+<g>
+ <rect x="30" y="210" width="140" height="56" rx="6" class="ep"/>
+ <text x="100" y="230" text-anchor="middle" class="ts">«extension point»</text>
+ <text x="100" y="251" text-anchor="middle" class="t" font-weight="600">ModelProvider</text>
+ <rect x="182" y="210" width="140" height="56" rx="6" class="ep"/>
+ <text x="252" y="230" text-anchor="middle" class="ts">«extension point»</text>
+ <text x="252" y="251" text-anchor="middle" class="t" font-weight="600">Tool</text>
+ <rect x="334" y="210" width="140" height="56" rx="6" class="ep"/>
+ <text x="404" y="230" text-anchor="middle" class="ts">«extension point»</text>
+ <text x="404" y="251" text-anchor="middle" class="t" font-weight="600">ContextStrategy</text>
+ <rect x="486" y="210" width="140" height="56" rx="6" class="ep"/>
+ <text x="556" y="230" text-anchor="middle" class="ts">«extension point»</text>
+ <text x="556" y="251" text-anchor="middle" class="t" font-weight="600">ThinkingStrategy</text>
+ <rect x="638" y="210" width="140" height="56" rx="6" class="ep"/>
+ <text x="708" y="230" text-anchor="middle" class="ts">«extension point»</text>
+ <text x="708" y="251" text-anchor="middle" class="t" font-weight="600">AutonomyPolicy</text>
+ <rect x="790" y="210" width="140" height="56" rx="6" class="ep"/>
+ <text x="860" y="230" text-anchor="middle" class="ts">«extension point»</text>
+ <text x="860" y="251" text-anchor="middle" class="t" font-weight="600">Frontend</text>
+</g>
+
+<path d="M100 266 V290 M252 266 V290 M404 266 V290 M556 266 V290 M708 266 V290 M860 266 V290" class="ln"/>
+
+<g class="t">
+ <rect x="30" y="290" width="140" height="34" rx="5" class="pl"/><text x="100" y="312" text-anchor="middle">Anthropic</text>
+ <rect x="30" y="334" width="140" height="34" rx="5" class="pl"/><text x="100" y="356" text-anchor="middle">OpenAI-compatible</text>
+ <rect x="30" y="378" width="140" height="34" rx="5" class="pl"/><text x="100" y="400" text-anchor="middle">Ollama / llama.cpp</text>
+
+ <rect x="182" y="290" width="140" height="34" rx="5" class="pl"/><text x="252" y="312" text-anchor="middle">File &amp; shell tools</text>
+ <rect x="182" y="334" width="140" height="34" rx="5" class="pl"/><text x="252" y="356" text-anchor="middle">Host bridges</text>
+ <rect x="182" y="378" width="140" height="34" rx="5" class="pl"/><text x="252" y="400" text-anchor="middle">MCP client</text>
+
+ <rect x="334" y="290" width="140" height="34" rx="5" class="pl"/><text x="404" y="312" text-anchor="middle">Sliding window</text>
+ <rect x="334" y="334" width="140" height="34" rx="5" class="pl"/><text x="404" y="356" text-anchor="middle">LLM summarisation</text>
+ <rect x="334" y="378" width="140" height="34" rx="5" class="pl"/><text x="404" y="400" text-anchor="middle">Semantic retrieval</text>
+
+ <rect x="486" y="290" width="140" height="34" rx="5" class="pl"/><text x="556" y="312" text-anchor="middle">Plain</text>
+ <rect x="486" y="334" width="140" height="34" rx="5" class="pl"/><text x="556" y="356" text-anchor="middle">Extended thinking</text>
+ <rect x="486" y="378" width="140" height="34" rx="5" class="pl"/><text x="556" y="400" text-anchor="middle">Plan-then-act</text>
+
+ <rect x="638" y="290" width="140" height="34" rx="5" class="pl"/><text x="708" y="312" text-anchor="middle">Ask every time</text>
+ <rect x="638" y="334" width="140" height="34" rx="5" class="pl"/><text x="708" y="356" text-anchor="middle">Capability policy</text>
+ <rect x="638" y="378" width="140" height="34" rx="5" class="pl"/><text x="708" y="400" text-anchor="middle">Sandboxed auto</text>
+
+ <rect x="790" y="290" width="140" height="34" rx="5" class="pl"/><text x="860" y="312" text-anchor="middle">Ktor HTTP / SSE</text>
+ <rect x="790" y="334" width="140" height="34" rx="5" class="pl"/><text x="860" y="356" text-anchor="middle">Compose UI</text>
+ <rect x="790" y="378" width="140" height="34" rx="5" class="pl"/><text x="860" y="400" text-anchor="middle">ACP for IDEs</text>
+</g>
+
+<rect x="30" y="440" width="900" height="76" rx="6" class="warn"/>
+<text x="46" y="464" class="tw2" font-weight="600">Gap to watch</text>
+<text x="46" y="484" class="tw2">Cross-cutting behaviour (log every tool call, approval before any write, cost accounting) does not fit one extension point.</text>
+<text x="46" y="502" class="tw2">It needs a second mechanism: interceptors / hooks around the turn loop. Every microkernel grows one eventually.</text>
+</svg>

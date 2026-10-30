@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="520" viewBox="0 0 960 520" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14">
+<style>
+ .t{fill:#1f2933}
+ .tw{fill:#ffffff}
+ .ts{fill:#52606d;font-size:12px}
+ .ktor{fill:#f1f5f8;stroke:#8fa3ad;stroke-width:1.5}
+ .core{fill:#dfe7ec;stroke:#2f3e46;stroke-width:2}
+ .chip{fill:#ffffff;stroke:#5c7080;stroke-width:1.2}
+ .dark{fill:#2f3e46}
+ .ln{stroke:#5c7080;stroke-width:1.5;fill:none}
+ .lnb{stroke:#c05621;stroke-width:1.8;fill:none;stroke-dasharray:6 4}
+ .tw2{fill:#9a4a12;font-size:12px;font-weight:600}
+</style>
+<defs>
+ <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+  <path d="M0 0 L10 5 L0 10 z" fill="#5c7080"/>
+ </marker>
+ <marker id="arrb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+  <path d="M0 0 L10 5 L0 10 z" fill="#c05621"/>
+ </marker>
+</defs>
+<rect width="960" height="520" fill="#fafafa"/>
+<text x="24" y="30" class="t" font-size="18" font-weight="600">Ktor plugins (transport) vs. Gaiagent plugins (domain)</text>
+
+<rect x="30" y="60" width="430" height="330" rx="10" class="ktor"/>
+<text x="48" y="86" class="t" font-weight="600">Ktor application — HTTP call pipeline</text>
+<text x="48" y="104" class="ts">Ktor plugins intercept here: onCall · onCallReceive · onCallRespond</text>
+
+<rect x="48" y="120" width="394" height="30" rx="5" class="dark"/>
+<text x="245" y="140" text-anchor="middle" class="tw" font-size="12">HTTP request from remote UI, phone, other service</text>
+<path d="M245 150 V166" class="ln" marker-end="url(#arr)"/>
+
+<g class="t" font-size="12">
+ <rect x="48" y="168" width="124" height="30" rx="5" class="chip"/><text x="110" y="188" text-anchor="middle">Authentication</text>
+ <rect x="183" y="168" width="124" height="30" rx="5" class="chip"/><text x="245" y="188" text-anchor="middle">Authorization</text>
+ <rect x="318" y="168" width="124" height="30" rx="5" class="chip"/><text x="380" y="188" text-anchor="middle">RateLimit</text>
+ <rect x="48" y="208" width="124" height="30" rx="5" class="chip"/><text x="110" y="228" text-anchor="middle">CallLogging</text>
+ <rect x="183" y="208" width="124" height="30" rx="5" class="chip"/><text x="245" y="228" text-anchor="middle">SSE / WebSockets</text>
+ <rect x="318" y="208" width="124" height="30" rx="5" class="chip"/><text x="380" y="228" text-anchor="middle">ContentNegotiation</text>
+</g>
+<text x="245" y="262" text-anchor="middle" class="ts">cross-cutting transport concerns = Ktor plugins ✔</text>
+<path d="M245 270 V286" class="ln" marker-end="url(#arr)"/>
+
+<rect x="48" y="288" width="394" height="30" rx="5" class="dark"/>
+<text x="245" y="308" text-anchor="middle" class="tw" font-size="12">Routes: /sessions · /turns (stream) · /tools · /workflows · /policies</text>
+<text x="245" y="345" text-anchor="middle" class="ts">routes translate HTTP ↔ core calls and nothing more</text>
+<text x="245" y="372" text-anchor="middle" class="ts">one of several driving adapters</text>
+
+<path d="M460 303 H540" class="ln" marker-end="url(#arr)"/>
+
+<rect x="540" y="60" width="390" height="350" rx="10" class="core"/>
+<text x="558" y="86" class="t" font-weight="600">Gaiagent core — domain</text>
+<text x="558" y="104" class="ts">no dependency on Ktor; works embedded with no HTTP at all</text>
+
+<text x="558" y="134" class="t" font-weight="600" font-size="13">Extension registry (agent plugins)</text>
+<g class="t" font-size="12">
+ <rect x="558" y="146" width="110" height="30" rx="5" class="chip"/><text x="613" y="166" text-anchor="middle">ModelProvider</text>
+ <rect x="678" y="146" width="110" height="30" rx="5" class="chip"/><text x="733" y="166" text-anchor="middle">Tool</text>
+ <rect x="798" y="146" width="114" height="30" rx="5" class="chip"/><text x="855" y="166" text-anchor="middle">ContextStrategy</text>
+ <rect x="558" y="186" width="110" height="30" rx="5" class="chip"/><text x="613" y="206" text-anchor="middle">Thinking</text>
+ <rect x="678" y="186" width="110" height="30" rx="5" class="chip"/><text x="733" y="206" text-anchor="middle">AutonomyPolicy</text>
+ <rect x="798" y="186" width="114" height="30" rx="5" class="chip"/><text x="855" y="206" text-anchor="middle">WorkflowStep</text>
+</g>
+
+<text x="558" y="250" class="t" font-weight="600" font-size="13">Turn pipeline</text>
+<rect x="558" y="262" width="354" height="30" rx="5" class="dark"/>
+<text x="735" y="282" text-anchor="middle" class="tw" font-size="12">Prepare → Compress → Select → Call → Gate → Execute → Persist</text>
+
+<text x="558" y="322" class="t" font-weight="600" font-size="13">Plugin tiers</text>
+<text x="558" y="340" class="ts">1 · in-process JAR (ServiceLoader)</text>
+<text x="558" y="356" class="ts">2 · script (Kotlin .kts / Lua)</text>
+<text x="558" y="372" class="ts">3 · out-of-process (MCP server)</text>
+<text x="558" y="396" class="ts">Same install-style DSL as Ktor: gaiagent { install(Anthropic) { … } }</text>
+
+<rect x="30" y="436" width="430" height="44" rx="8" class="ktor"/>
+<text x="245" y="455" text-anchor="middle" class="t" font-weight="600" font-size="13">Compose desktop · Reaper / Krita bridge · CLI</text>
+<text x="245" y="472" text-anchor="middle" class="ts">in-process callers — there is no HTTP here</text>
+<path d="M460 458 H735 V412" class="lnb" marker-end="url(#arrb)"/>
+<text x="600" y="448" class="tw2">bypasses Ktor entirely →</text>
+<text x="480" y="504" text-anchor="middle" class="tw2">Therefore agent plugins cannot live in Ktor: they must register with the core, which every adapter reaches.</text>
+</svg>

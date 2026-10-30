@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14">
+<style>
+ .t{fill:#1f2933}
+ .tw{fill:#ffffff}
+ .ts{fill:#52606d;font-size:12px}
+ .bus{fill:#2f3e46;stroke:#1b262c;stroke-width:1.5}
+ .box{fill:#dfe7ec;stroke:#5c7080;stroke-width:1.5}
+ .actor{fill:#ffffff;stroke:#5c7080;stroke-width:1.5}
+ .ln{stroke:#5c7080;stroke-width:1.5;fill:none}
+ .warn{fill:#fff4e5;stroke:#c05621;stroke-width:1.2;stroke-dasharray:5 4}
+ .tw2{fill:#9a4a12;font-size:12px}
+ .ev{fill:#3d5a80;font-size:11px;font-family:Consolas, Menlo, monospace}
+</style>
+<defs>
+ <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+  <path d="M0 0 L10 5 L0 10 z" fill="#5c7080"/>
+ </marker>
+</defs>
+<rect width="960" height="560" fill="#fafafa"/>
+<text x="24" y="30" class="t" font-size="18" font-weight="600">Architecture B — Event-driven core (actors on a typed event bus)</text>
+
+<text x="30" y="68" class="ts">Producers / ingress</text>
+<g class="t">
+ <rect x="30" y="80" width="190" height="64" rx="6" class="box"/>
+ <text x="125" y="105" text-anchor="middle" font-weight="600">Ingress adapters</text>
+ <text x="125" y="125" text-anchor="middle" class="ts">Ktor HTTP · Compose UI</text>
+
+ <rect x="260" y="80" width="190" height="64" rx="6" class="box"/>
+ <text x="355" y="105" text-anchor="middle" font-weight="600">Host bridges</text>
+ <text x="355" y="125" text-anchor="middle" class="ts">Reaper · Krita · IDE (ACP)</text>
+
+ <rect x="490" y="80" width="190" height="64" rx="6" class="box"/>
+ <text x="585" y="105" text-anchor="middle" font-weight="600">Workflow engine</text>
+ <text x="585" y="125" text-anchor="middle" class="ts">step N result → step N+1</text>
+
+ <rect x="720" y="80" width="210" height="64" rx="6" class="box"/>
+ <text x="825" y="105" text-anchor="middle" font-weight="600">Scheduler / triggers</text>
+ <text x="825" y="125" text-anchor="middle" class="ts">cron · file watch · webhook</text>
+</g>
+
+<path d="M125 144 V250" class="ln" marker-end="url(#arr)"/>
+<path d="M355 144 V250" class="ln" marker-end="url(#arr)"/>
+<path d="M585 144 V250" class="ln" marker-end="url(#arr)"/>
+<path d="M825 144 V250" class="ln" marker-end="url(#arr)"/>
+<text x="133" y="200" class="ev">UserMessage</text>
+<text x="363" y="200" class="ev">HostStateChanged</text>
+<text x="593" y="200" class="ev">StepRequested</text>
+<text x="833" y="200" class="ev">TriggerFired</text>
+
+<rect x="30" y="252" width="900" height="44" rx="8" class="bus"/>
+<text x="480" y="279" text-anchor="middle" class="tw" font-weight="600">Typed event bus — SharedFlow&lt;TurnEvent&gt; backed by an append-only event log</text>
+
+<path d="M110 296 V350" class="ln" marker-end="url(#arr)"/><path d="M130 350 V296" class="ln" marker-end="url(#arr)"/>
+<path d="M295 296 V350" class="ln" marker-end="url(#arr)"/><path d="M315 350 V296" class="ln" marker-end="url(#arr)"/>
+<path d="M480 296 V350" class="ln" marker-end="url(#arr)"/><path d="M500 350 V296" class="ln" marker-end="url(#arr)"/>
+<path d="M665 296 V350" class="ln" marker-end="url(#arr)"/><path d="M685 350 V296" class="ln" marker-end="url(#arr)"/>
+<path d="M850 296 V350" class="ln" marker-end="url(#arr)"/>
+
+<g class="t">
+ <rect x="30" y="350" width="160" height="72" rx="6" class="actor"/>
+ <text x="110" y="373" text-anchor="middle" font-weight="600">Model actor</text>
+ <text x="110" y="391" text-anchor="middle" class="ts">picks provider, streams</text>
+ <text x="110" y="407" text-anchor="middle" class="ev">ModelRequested → Chunk</text>
+
+ <rect x="215" y="350" width="160" height="72" rx="6" class="actor"/>
+ <text x="295" y="373" text-anchor="middle" font-weight="600">Policy guard</text>
+ <text x="295" y="391" text-anchor="middle" class="ts">autonomy level, vetoes</text>
+ <text x="295" y="407" text-anchor="middle" class="ev">Proposed → Decision</text>
+
+ <rect x="400" y="350" width="160" height="72" rx="6" class="actor"/>
+ <text x="480" y="373" text-anchor="middle" font-weight="600">Tool executor</text>
+ <text x="480" y="391" text-anchor="middle" class="ts">local tools · MCP servers</text>
+ <text x="480" y="407" text-anchor="middle" class="ev">Approved → ToolResult</text>
+
+ <rect x="585" y="350" width="160" height="72" rx="6" class="actor"/>
+ <text x="665" y="373" text-anchor="middle" font-weight="600">Memory &amp; persistence</text>
+ <text x="665" y="391" text-anchor="middle" class="ts">event log → SQLite</text>
+ <text x="665" y="407" text-anchor="middle" class="ev">stored · replayable</text>
+
+ <rect x="770" y="350" width="160" height="72" rx="6" class="actor"/>
+ <text x="850" y="373" text-anchor="middle" font-weight="600">Observers</text>
+ <text x="850" y="391" text-anchor="middle" class="ts">UI stream · logs · cost</text>
+ <text x="850" y="407" text-anchor="middle" class="ev">read-only subscribers</text>
+</g>
+
+<rect x="30" y="440" width="900" height="36" rx="6" class="box"/>
+<text x="480" y="463" text-anchor="middle" class="ev">UserMessage · ModelRequested · ModelChunk · ToolCallProposed · ToolCallApproved | ToolCallVetoed · ToolResult · AssistantMessage · TurnCompleted</text>
+
+<rect x="30" y="488" width="900" height="56" rx="6" class="warn"/>
+<text x="46" y="510" class="tw2" font-weight="600">Gap to watch</text>
+<text x="46" y="530" class="tw2">Ordering and causality live in the event log, not in code. Excellent for audit and replay; hard to debug "why did nothing happen" and to type strictly.</text>
+</svg>

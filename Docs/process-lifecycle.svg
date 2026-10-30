@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14">
+<style>
+ .t{fill:#1f2933}
+ .tw{fill:#ffffff}
+ .ts{fill:#52606d;font-size:12px}
+ .st{fill:#ffffff;stroke:#2f3e46;stroke-width:1.5}
+ .end{fill:#dfe7ec;stroke:#2f3e46;stroke-width:1.5}
+ .warn{fill:#fff4e5;stroke:#c05621;stroke-width:1.4}
+ .ctx{fill:#ffffff;stroke:#5c7080;stroke-width:1.5}
+ .dark{fill:#2f3e46}
+ .ln{stroke:#5c7080;stroke-width:1.5;fill:none}
+ .lnd{stroke:#c05621;stroke-width:1.4;fill:none;stroke-dasharray:5 4}
+ .tag{fill:#3d5a80;font-size:11px;font-weight:600}
+ .tw2{fill:#9a4a12;font-size:11px}
+</style>
+<defs>
+ <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+  <path d="M0 0 L10 5 L0 10 z" fill="#5c7080"/>
+ </marker>
+ <marker id="arrw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+  <path d="M0 0 L10 5 L0 10 z" fill="#c05621"/>
+ </marker>
+</defs>
+<rect width="960" height="560" fill="#fafafa"/>
+<text x="24" y="30" class="t" font-size="18" font-weight="600">Process lifecycle and context flow around a child</text>
+
+<text x="40" y="70" class="tag">PROCESS STATE MACHINE</text>
+<g class="t">
+ <rect x="40" y="90" width="150" height="36" rx="6" class="st"/><text x="115" y="113" text-anchor="middle">Created</text>
+ <rect x="40" y="160" width="150" height="36" rx="6" class="st"/><text x="115" y="183" text-anchor="middle">Running</text>
+ <rect x="40" y="230" width="150" height="36" rx="6" class="st"/><text x="115" y="253" text-anchor="middle" font-size="13">WaitingForChildren</text>
+ <rect x="40" y="300" width="150" height="36" rx="6" class="st"/><text x="115" y="323" text-anchor="middle">Converging</text>
+ <rect x="40" y="370" width="150" height="36" rx="6" class="end"/><text x="115" y="393" text-anchor="middle" font-weight="600">Completed</text>
+
+ <rect x="280" y="160" width="170" height="36" rx="6" class="st"/><text x="365" y="183" text-anchor="middle" font-size="13">WaitingForApproval</text>
+ <rect x="280" y="230" width="170" height="36" rx="6" class="st"/><text x="365" y="246" text-anchor="middle" font-weight="600" font-size="13">Suspended</text><text x="365" y="260" text-anchor="middle" class="ts" font-size="10">serialised · no coroutine · resumable</text>
+ <rect x="280" y="300" width="170" height="36" rx="6" class="warn"/><text x="365" y="316" text-anchor="middle" font-weight="600" font-size="13">Cancelled</text><text x="365" y="330" text-anchor="middle" class="tw2">partial result kept</text>
+ <rect x="280" y="370" width="170" height="36" rx="6" class="warn"/><text x="365" y="386" text-anchor="middle" font-weight="600" font-size="13">Failed</text><text x="365" y="400" text-anchor="middle" class="tw2">error + partial result</text>
+</g>
+<path d="M115 126 V160" class="ln" marker-end="url(#arr)"/>
+<path d="M115 196 V230" class="ln" marker-end="url(#arr)"/>
+<path d="M115 266 V300" class="ln" marker-end="url(#arr)"/>
+<path d="M115 336 V370" class="ln" marker-end="url(#arr)"/>
+<text x="125" y="217" class="ts" font-size="10">spawned children</text>
+<text x="125" y="287" class="ts" font-size="10">all children finished</text>
+<path d="M190 172 H280" class="ln" marker-end="url(#arr)"/>
+<path d="M280 186 H190" class="ln" marker-end="url(#arr)"/>
+<text x="235" y="158" text-anchor="middle" class="ts" font-size="10">needs approval · decision</text>
+<path d="M40 178 H22 V318 H40" class="ln" marker-end="url(#arr)"/>
+<text x="16" y="250" text-anchor="middle" class="ts" font-size="9" transform="rotate(-90 16 250)">no children</text>
+<path d="M190 242 H280" class="ln" marker-end="url(#arr)"/>
+<path d="M280 254 H190" class="ln" marker-end="url(#arr)"/>
+<text x="235" y="228" text-anchor="middle" class="ts" font-size="10">suspend ⇄ resume</text>
+<path d="M235 270 V330 H280" class="lnd" marker-end="url(#arrw)"/>
+<path d="M235 330 V388 H280" class="lnd" marker-end="url(#arrw)"/>
+<text x="242" y="286" class="tw2">from any</text>
+<text x="242" y="298" class="tw2">active state</text>
+
+<text x="40" y="440" class="tag">KOTLIN MAPPING</text>
+<g class="ts">
+ <text x="40" y="460">one CoroutineScope per process · children are child jobs</text>
+ <text x="40" y="478">SupervisorJob: a failing sibling does not cancel the others</text>
+ <text x="40" y="496">cancellation is cooperative: the child gets to finish its current step</text>
+ <text x="40" y="514">partial result and context delta persisted in withContext(NonCancellable)</text>
+ <text x="40" y="532">parent sees ChildFinished(status = Done | Partial | Failed) and decides via its Merge slot</text>
+ <text x="40" y="550">resume = rebuild from the log, then start a new turn on the same context; hooks keep no state outside the log</text>
+</g>
+
+<text x="520" y="70" class="tag">CONTEXT FLOW</text>
+<rect x="520" y="90" width="400" height="56" rx="8" class="dark"/>
+<text x="720" y="113" text-anchor="middle" class="tw" font-weight="600">Parent context</text>
+<text x="720" y="131" text-anchor="middle" class="tw" font-size="12">append-only log · provenance-tagged entries · views built per step</text>
+
+<path d="M720 146 V190" class="ln" marker-end="url(#arr)"/>
+<text x="728" y="172" class="ts" font-size="11">Brief = Projection(parent log, task, privacy zone, budget)</text>
+
+<rect x="560" y="190" width="320" height="56" rx="8" class="ctx"/>
+<text x="720" y="213" text-anchor="middle" class="t" font-weight="600">Child context</text>
+<text x="720" y="231" text-anchor="middle" class="ts">fresh · budgeted · own views · own policy level</text>
+
+<path d="M720 246 V290" class="ln" marker-end="url(#arr)"/>
+<text x="728" y="272" class="ts" font-size="11">child runs its turns (level 1), may spawn its own children</text>
+
+<rect x="560" y="290" width="320" height="56" rx="8" class="ctx"/>
+<text x="720" y="313" text-anchor="middle" class="t" font-weight="600">ChildResult</text>
+<text x="720" y="331" text-anchor="middle" class="ts">output · context delta · status: Done | Partial | Failed</text>
+
+<path d="M720 346 V390" class="ln" marker-end="url(#arr)"/>
+
+<rect x="560" y="390" width="320" height="56" rx="8" class="ctx"/>
+<text x="720" y="413" text-anchor="middle" class="t" font-weight="600">Merge (slot)</text>
+<text x="720" y="431" text-anchor="middle" class="ts">concat · summarise · pick-best · drop partials · custom</text>
+
+<path d="M880 418 H930 V118 H922" class="ln" marker-end="url(#arr)"/>
+<text x="944" y="300" text-anchor="middle" class="ts" font-size="10" transform="rotate(-90 944 300)">merged back, provenance kept</text>
+
+<path d="M720 446 V480" class="ln" marker-end="url(#arr)"/>
+<rect x="520" y="480" width="400" height="48" rx="8" class="ctx"/>
+<text x="720" y="500" text-anchor="middle" class="t" font-weight="600" font-size="13">Next node (level 3) gets a forward projection</text>
+<text x="720" y="517" text-anchor="middle" class="ts">a fresh context; nothing flows back from it</text>
+</svg>

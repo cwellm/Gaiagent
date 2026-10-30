@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14">
+<style>
+ .t{fill:#1f2933}
+ .tw{fill:#ffffff}
+ .ts{fill:#52606d;font-size:12px}
+ .band{fill:#f1f5f8;stroke:#8fa3ad;stroke-width:1.2}
+ .node{fill:#ffffff;stroke:#2f3e46;stroke-width:1.5}
+ .dark{fill:#2f3e46;stroke:#1b262c;stroke-width:1.5}
+ .chip{fill:#ffffff;stroke:#5c7080;stroke-width:1.2}
+ .warn{fill:#fff4e5;stroke:#c05621;stroke-width:1.4;stroke-dasharray:5 4}
+ .tw2{fill:#9a4a12;font-size:11px}
+ .ln{stroke:#5c7080;stroke-width:1.5;fill:none}
+ .tag{fill:#3d5a80;font-size:11px;font-weight:600}
+ .dot{fill:#c05621}
+</style>
+<defs>
+ <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+  <path d="M0 0 L10 5 L0 10 z" fill="#5c7080"/>
+ </marker>
+</defs>
+<rect width="960" height="640" fill="#fafafa"/>
+<text x="24" y="30" class="t" font-size="18" font-weight="600">Three levels of composition — flow graph, process tree, turn</text>
+
+<rect x="30" y="56" width="900" height="190" rx="10" class="band"/>
+<text x="46" y="80" class="tag">LEVEL 3 · FLOW GRAPH (horizontal composition)</text>
+<text x="46" y="98" class="ts">nodes = finished processes · edges = projections · fan-out and fan-in · built by a Router at runtime or declared in a workflow file</text>
+<g class="t">
+ <rect x="60" y="150" width="130" height="44" rx="8" class="node"/><text x="125" y="168" text-anchor="middle" font-weight="600">Node A</text><text x="125" y="185" text-anchor="middle" class="ts">research</text>
+ <rect x="300" y="120" width="130" height="44" rx="8" class="node" stroke-width="2.5"/><text x="365" y="138" text-anchor="middle" font-weight="600">Node B</text><text x="365" y="155" text-anchor="middle" class="ts">draft</text>
+ <rect x="300" y="190" width="130" height="44" rx="8" class="node"/><text x="365" y="208" text-anchor="middle" font-weight="600">Node C</text><text x="365" y="225" text-anchor="middle" class="ts">critique plan</text>
+ <rect x="540" y="150" width="130" height="44" rx="8" class="node"/><text x="605" y="168" text-anchor="middle" font-weight="600">Node D</text><text x="605" y="185" text-anchor="middle" class="ts">merge &amp; finalize</text>
+ <rect x="780" y="150" width="130" height="44" rx="8" class="node"/><text x="845" y="168" text-anchor="middle" font-weight="600">End node</text><text x="845" y="185" text-anchor="middle" class="ts">collected result</text>
+</g>
+<path d="M190 172 L300 142" class="ln" marker-end="url(#arr)"/>
+<path d="M190 172 L300 212" class="ln" marker-end="url(#arr)"/>
+<path d="M430 142 L540 172" class="ln" marker-end="url(#arr)"/>
+<path d="M430 212 L540 172" class="ln" marker-end="url(#arr)"/>
+<path d="M670 172 H780" class="ln" marker-end="url(#arr)"/>
+<text x="245" y="148" text-anchor="middle" class="ts" font-size="10">projection</text>
+<text x="245" y="206" text-anchor="middle" class="ts" font-size="10">projection</text>
+<text x="485" y="148" text-anchor="middle" class="ts" font-size="10">fan-in</text>
+<text x="365" y="180" text-anchor="middle" class="tag" font-size="10">↓ Node B expanded below</text>
+
+<rect x="30" y="260" width="900" height="190" rx="10" class="band"/>
+<text x="46" y="284" class="tag">LEVEL 2 · PROCESS TREE (vertical composition, delegation)</text>
+<text x="46" y="302" class="ts">a node may spawn child processes, await all of them and converge their results into its own context · Kotlin structured concurrency</text>
+<rect x="400" y="320" width="180" height="44" rx="8" class="dark"/>
+<text x="490" y="338" text-anchor="middle" class="tw" font-weight="600">Process of Node B</text>
+<text x="490" y="355" text-anchor="middle" class="tw" font-size="11">parent turn keeps its live context</text>
+<g class="t">
+ <rect x="120" y="392" width="170" height="52" rx="8" class="chip"/><text x="205" y="411" text-anchor="middle" font-weight="600">child 1</text><text x="205" y="428" text-anchor="middle" class="ts">search local notes · done</text>
+ <rect x="395" y="392" width="170" height="52" rx="8" class="chip"/><text x="480" y="411" text-anchor="middle" font-weight="600">child 2</text><text x="480" y="428" text-anchor="middle" class="ts">search web · done</text>
+ <rect x="670" y="392" width="170" height="52" rx="8" class="warn"/><text x="755" y="411" text-anchor="middle" font-weight="600">child 3</text><text x="755" y="428" text-anchor="middle" class="tw2">long experiment · cancelled → partial</text>
+</g>
+<path d="M440 364 L215 392" class="ln" marker-end="url(#arr)"/>
+<path d="M490 364 V392" class="ln" marker-end="url(#arr)"/>
+<path d="M540 364 L745 392" class="ln" marker-end="url(#arr)"/>
+<text x="300" y="372" text-anchor="middle" class="ts" font-size="10">brief ↓ · result ↑</text>
+<text x="660" y="372" text-anchor="middle" class="ts" font-size="10">brief ↓ · partial result ↑</text>
+<text x="498" y="383" class="ts" font-size="10">brief ↓ · result ↑</text>
+
+<rect x="30" y="464" width="900" height="160" rx="10" class="band"/>
+<text x="46" y="488" class="tag">LEVEL 1 · TURN (inside one process)</text>
+<text x="780" y="488" class="ts">● = interception point</text>
+<text x="46" y="506" class="ts">linear phases with interception points · the inner step loop (model ↔ tools) is bounded by budget and policy · this is the old "pipeline"</text>
+<g class="t" font-size="12">
+ <rect x="60" y="540" width="100" height="36" rx="6" class="chip"/><text x="110" y="563" text-anchor="middle">Prepare</text>
+ <rect x="170" y="540" width="100" height="36" rx="6" class="chip"/><text x="220" y="563" text-anchor="middle">Compress</text>
+ <rect x="280" y="540" width="100" height="36" rx="6" class="chip"/><text x="330" y="563" text-anchor="middle">Select</text>
+ <rect x="390" y="540" width="100" height="36" rx="6" class="chip"/><text x="440" y="563" text-anchor="middle">Call model</text>
+ <rect x="500" y="540" width="100" height="36" rx="6" class="chip"/><text x="550" y="563" text-anchor="middle">Gate</text>
+ <rect x="610" y="540" width="100" height="36" rx="6" class="chip"/><text x="660" y="563" text-anchor="middle">Execute</text>
+ <rect x="720" y="540" width="100" height="36" rx="6" class="chip"/><text x="770" y="563" text-anchor="middle">Converge</text>
+ <rect x="830" y="540" width="100" height="36" rx="6" class="chip"/><text x="880" y="563" text-anchor="middle">Persist</text>
+</g>
+<g class="dot">
+ <circle cx="165" cy="558" r="4"/><circle cx="275" cy="558" r="4"/><circle cx="385" cy="558" r="4"/><circle cx="495" cy="558" r="4"/><circle cx="605" cy="558" r="4"/><circle cx="715" cy="558" r="4"/><circle cx="825" cy="558" r="4"/>
+</g>
+<path d="M660 576 V598 H440 V578" class="ln" marker-end="url(#arr)"/>
+<text x="550" y="612" text-anchor="middle" class="ts" font-size="11">step loop: tool results go back to the model until it answers or the budget ends</text>
+<text x="770" y="596" text-anchor="middle" class="ts" font-size="10">children merge here, if any</text>
+</svg>
